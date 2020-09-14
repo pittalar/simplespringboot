@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.java4u</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>simplespringboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simplespringboot</name>
 	<description>Demo project for Spring Boot</description>
@@ -19,10 +19,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -53,6 +49,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>simplespringboot</finalName>
 	</build>
 
 </project>
