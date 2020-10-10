@@ -10,11 +10,11 @@ String branchName = env.BRANCH_NAME
 String env = env.BRANCH_NAME
 
 pipeline {
-    agent any()
+    agent any
 
     stages {
         stage('Build') {
-            agent { label 'linux' }
+            agent any
             tools {
                 maven 'maven-3.5.0'
             }
@@ -37,7 +37,7 @@ pipeline {
         }
 
         stage('Code Analytics') {
-            agent any()
+            agent any
             tools {
                 maven 'maven-3.5.0'
             }
