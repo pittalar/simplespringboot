@@ -60,7 +60,7 @@ pipeline {
             when {
                 anyOf { branch 'develop'; branch 'master'; branch 'release' }
             }
-			agent any()
+	agent any
             steps{
                 script {
                    dockerBuildArgs = ['version':"${version}"]
