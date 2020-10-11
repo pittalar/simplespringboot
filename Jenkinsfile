@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             agent any
             tools {
-                maven 'maven-3.5.0'
+                maven 'Maven 3.6.3'
             }
             steps {
                 script {
@@ -39,7 +39,7 @@ pipeline {
         stage('Code Analytics') {
             agent any
             tools {
-                maven 'maven-3.5.0'
+                maven 'Maven 3.6.3'
             }
             environment{
                  SONAR_SCANNER_OPTS="-Xmx512m"
