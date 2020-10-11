@@ -19,9 +19,7 @@ pipeline {
                 maven 'Maven 3.6.3'
             }
             steps {
-                dir("${WORKSPACE}") {
-			maven('clean build', projectFile)
-                }
+                maven('clean build', projectFile)
             }
         }
 
