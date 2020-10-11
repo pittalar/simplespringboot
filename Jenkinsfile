@@ -11,7 +11,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		    maven('clean verify', 'pom.xml')		    
+		    withMaven(maven : 'Maven 3.6.3')	{
+		    	sh 'mvn clean build'
+		    }
             }
         }
         stage('Test') {
