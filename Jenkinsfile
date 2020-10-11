@@ -1,14 +1,3 @@
-#!groovy
-String version
-
-def featureEnv = env.BRANCH_NAME != 'master'
-String appName = "eqx_api-api-account"
-String projectFile = "pom.xml"
-String versionKey = "version"
-
-String branchName = env.BRANCH_NAME
-String env = env.BRANCH_NAME
-
 pipeline {
     agent any
 	
@@ -27,8 +16,9 @@ pipeline {
                 echo 'Testing..'
             }
         }
+
         stage('Test Deploy') {
-	when {
+      	when {
                 anyOf { branch 'develop'; }
             }			      
             steps {
@@ -37,8 +27,8 @@ pipeline {
         }
 	stage('Stag Deploy') {
 	when {
-		anyOf { branch 'release'; }
-            }
+		      anyOf { branch 'release'; }
+       }
             steps {
                 echo 'Deploying....'
             }
