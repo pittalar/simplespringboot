@@ -25,38 +25,5 @@ pipeline {
 		    }
 	    }
         }
-
-        stage('Code Analytics') {
-            agent any
-            tools {
-                maven 'Maven 3.6.3'
-            }
-            environment{
-                 SONAR_SCANNER_OPTS="-Xmx512m"
-            }
-            steps {
-                dir("${WORKSPACE}") {
-                    unstash name: "${appName}-build-output-${env}"
-                    withSonarQubeEnv('Sonarqube') {
-                        maven {
-			    goals('test')
-			}
-                    }
-                }
-            }
-        }
-
-
-        stage('Artifact Build') {
-            when {
-                anyOf { branch 'develop'; branch 'master'; branch 'release' }
-            }
-	    agent any
-            steps{
-                script {
-                   dockerBuildArgs = ['version':"${version}"]
-                }           
-            }
-        }
     }
 }
