@@ -23,6 +23,7 @@ pipeline {
 			    goals('clean')
 			    goals('build')
 		    }
+	    }
         }
 
         stage('Code Analytics') {
@@ -42,7 +43,6 @@ pipeline {
 			}
                     }
                 }
-
             }
         }
 
