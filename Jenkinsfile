@@ -19,7 +19,9 @@ pipeline {
                 maven 'Maven 3.6.3'
             }
             steps {
-                maven('clean build', projectFile)
+		    withMaven {
+			   sh "mvn clean build"
+		    }
             }
         }
 
@@ -35,7 +37,9 @@ pipeline {
                 dir("${WORKSPACE}") {
                     unstash name: "${appName}-build-output-${env}"
                     withSonarQubeEnv('Sonarqube') {
-                        mavenTest(projectFile, branchName)
+                        withMaven {
+			   sh "mvn test"
+		    }
                     }
                 }
 
