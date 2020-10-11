@@ -19,6 +19,7 @@ pipeline {
                 maven 'Maven 3.6.3'
             }
             steps {
+		    maven('clean build', projectFile)
 		    maven {
 			    goals('clean')
 			    goals('build')
