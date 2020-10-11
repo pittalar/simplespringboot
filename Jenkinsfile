@@ -16,7 +16,7 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Test Deploy') {\
+        stage('Test Deploy') {
 	when {
                 anyOf { branch 'develop'; }
             }			      
@@ -26,7 +26,7 @@ pipeline {
         }
 	stage('Stag Deploy') {
 	when {
-		anyOf { branch 'release' }
+		anyOf { branch 'release'; }
             }
             steps {
                 echo 'Deploying....'
