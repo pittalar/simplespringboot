@@ -12,9 +12,7 @@ pipeline {
             steps {
                 echo 'Building..'
 		    maven('clean verify', projectFile,'hudson.tasks.Maven')
-		    maven {
-			    goals('clean install')
-		    }
+		    
             }
         }
         stage('Test') {
