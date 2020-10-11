@@ -19,13 +19,6 @@ pipeline {
                 maven 'Maven 3.6.3'
             }
             steps {
-                script {
-                    version = featureEnv ?
-                            VersionNumber(versionNumberString:'${BUILD_YEAR}.${BUILD_MONTH}.${BUILD_DAY}.${BUILDS_TODAY}', skipFailedBuilds:false) :
-                            VersionNumber(versionNumberString: '1.0.${BUILD_NUMBER, X}', skipFailedBuilds:false)
-                    currentBuild.displayName = version
-                    println "Pipeline Version='${version}'"
-                }
                 dir("${WORKSPACE}") {
                     mavenBuild(version, appName, env, projectFile)
                 }
