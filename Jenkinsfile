@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		    maven('clean verify', projectFile)		    
+		    maven('clean verify', 'pom.xml')		    
             }
         }
         stage('Test') {
