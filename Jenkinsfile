@@ -9,6 +9,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+		    maven {
+			    goals('clean install')
+		    }
             }
         }
         stage('Test') {
