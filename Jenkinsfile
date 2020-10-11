@@ -11,60 +11,44 @@ String env = env.BRANCH_NAME
 
 pipeline {
     agent any
-
+	
+	tools {
+		maven 'Maven 3.6.3'
+		jdk 'jdk8'
+	    }
     stages {
         stage('Build') {
-            agent any
-            tools {
-                maven 'Maven 3.6.3'
-            }
             steps {
-                script {
-                    version = featureEnv ?
-                            VersionNumber(versionNumberString:'${BUILD_YEAR}.${BUILD_MONTH}.${BUILD_DAY}.${BUILDS_TODAY}', skipFailedBuilds:false) :
-                            VersionNumber(versionNumberString: '1.0.${BUILD_NUMBER, X}', skipFailedBuilds:false)
-                    currentBuild.displayName = version
-                    println "Pipeline Version='${version}'"
-                }
-                dir("${WORKSPACE}") {
-                    sh("""
-                        # Set version based on build number
-                        find . -type f -name pom.xml | xargs sed -i 's/0.0.0/'${version}'/g'
-                    """)
-                    mavenBuild(version, appName, env, projectFile)
-                }
+                echo 'Building..'
             }
         }
-
-        stage('Code Analytics') {
-            agent any
-            tools {
-                maven 'Maven 3.6.3'
-            }
-            environment{
-                 SONAR_SCANNER_OPTS="-Xmx512m"
-            }
+        stage('Test') {
             steps {
-                dir("${WORKSPACE}") {
-                    unstash name: "${appName}-build-output-${env}"
-                    withSonarQubeEnv('Sonarqube') {
-                        mavenTest(projectFile, branchName)
-                    }
-                }
-
+                echo 'Testing..'
             }
         }
-
-
-        stage('Artifact Build') {
-            when {
-                anyOf { branch 'develop'; branch 'master'; branch 'release' }
+        stage('Test Deploy') {\
+	when {
+                anyOf { branch 'develop'; }
+            }			      
+            steps {
+                echo 'Deploying....'
             }
-	agent any
-            steps{
-                script {
-                   dockerBuildArgs = ['version':"${version}"]
-                }           
+        }
+	stage('Stag Deploy') {
+	when {
+		anyOf { branch 'release' }
+            }
+            steps {
+                echo 'Deploying....'
+            }
+        }
+	stage('Prod Deploy') {
+	when {
+                anyOf { branch 'master'; }
+            }
+            steps {
+                echo 'Deploying....'
             }
         }
     }
