@@ -19,10 +19,10 @@ pipeline {
                 maven 'Maven 3.6.3'
             }
             steps {
-		    withMaven {
-			   sh "mvn clean build"
+		    maven {
+			    goals('clean')
+			    goals('build')
 		    }
-            }
         }
 
         stage('Code Analytics') {
@@ -37,9 +37,9 @@ pipeline {
                 dir("${WORKSPACE}") {
                     unstash name: "${appName}-build-output-${env}"
                     withSonarQubeEnv('Sonarqube') {
-                        withMaven {
-			   sh "mvn test"
-		    }
+                        maven {
+			    goals('test')
+			}
                     }
                 }
 
