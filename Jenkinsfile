@@ -1,3 +1,5 @@
+String projectFile = "pom.xml"
+
 pipeline {
     agent any
 	
@@ -9,6 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+		    maven('clean verify', projectFile)
 		    maven {
 			    goals('clean install')
 		    }
