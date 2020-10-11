@@ -11,8 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		    maven('clean verify', projectFile,hudson.tasks.Maven)
-		    
+		    maven('clean verify', projectFile)		    
             }
         }
         stage('Test') {
