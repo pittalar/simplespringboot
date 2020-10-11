@@ -19,7 +19,7 @@ pipeline {
 
         stage('Test Deploy') {
 	      when {
-                anyOf { branch 'develop'; }
+                anyOf { branch 'devlop'; }
             }			      
             steps {
                 echo 'Deploying....'
