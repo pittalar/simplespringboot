@@ -17,30 +17,19 @@ pipeline {
 		jdk 'jdk8'
 	    }
     stages {
-        stage ('Build') {
+        stage('Build') {
             steps {
-               sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                echo 'Building..'
             }
         }
-	    
-	stage ('Code Analysis') {
+        stage('Test') {
             steps {
-               sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                echo 'Testing..'
             }
         }
-	    
-	stage ('Test Deploy') {
+        stage('Deploy') {
             steps {
-               sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                '''
+                echo 'Deploying....'
             }
         }
     }
