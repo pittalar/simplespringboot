@@ -19,7 +19,28 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                sh 'mvn clean install' 
+               sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+	    
+	stage ('Code Analysis') {
+            steps {
+               sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+	    
+	stage ('Test Deploy') {
+            steps {
+               sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
         }
     }
