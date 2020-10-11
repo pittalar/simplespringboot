@@ -18,7 +18,7 @@ pipeline {
         }
 
         stage('Test Deploy') {
-      	when {
+	      when {
                 anyOf { branch 'develop'; }
             }			      
             steps {
@@ -29,6 +29,7 @@ pipeline {
 	when {
 		      anyOf { branch 'release'; }
        }
+
             steps {
                 echo 'Deploying....'
             }
