@@ -2,7 +2,7 @@
 String version
 
 def featureEnv = env.BRANCH_NAME != 'master'
-String appName = "eqx_api-api-account"
+String appName = "simplespringboot"
 String projectFile = "pom.xml"
 String versionKey = "version"
 
@@ -27,10 +27,6 @@ pipeline {
                     println "Pipeline Version='${version}'"
                 }
                 dir("${WORKSPACE}") {
-                    sh("""
-                        # Set version based on build number
-                        find . -type f -name pom.xml | xargs sed -i 's/0.0.0/'${version}'/g'
-                    """)
                     mavenBuild(version, appName, env, projectFile)
                 }
             }
