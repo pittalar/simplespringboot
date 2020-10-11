@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		    maven('clean verify', projectFile)
+		    maven('clean verify', projectFile,'hudson.tasks.Maven')
 		    maven {
 			    goals('clean install')
 		    }
