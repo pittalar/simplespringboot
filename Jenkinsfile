@@ -20,7 +20,7 @@ pipeline {
             }
             steps {
                 dir("${WORKSPACE}") {
-                    mavenBuild(version, appName, env, projectFile)
+			maven('clean build', projectFile)
                 }
             }
         }
